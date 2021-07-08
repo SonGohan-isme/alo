@@ -166,14 +166,14 @@ export class CustomerService {
 
   //Contact
   public getAllProvince(): Observable<any> {
-    const url = this.common.makeUrl("/customer-api/get_all_province");
+    const url = this.common.makeUrlForCustomer("/customer-api/get_all_province");
     return this.httpClient
       .get<any>(url, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   public getAllDistrictByIdProvince(id_province: number): Observable<any> {
-    const url = this.common.makeUrl("/customer-api/get_all_district_by_id_province");
+    const url = this.common.makeUrlForCustomer("/customer-api/get_all_district_by_id_province");
     return this.httpClient
       .post<any>(url, id_province, this.httpOptions)
       .pipe(catchError(this.handleError));

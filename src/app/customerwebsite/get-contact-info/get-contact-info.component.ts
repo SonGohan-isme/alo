@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalDirective } from 'ng2-bootstrap';
-
-import { CanActivate } from "@angular/router";
-import { Injectable } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { District } from 'src/app/model/District';
+import { Province } from 'src/app/model/Province';
+import { CustomerService } from 'src/app/services/customer/customer.service';
 
 @Component({
   selector: 'app-get-contact-info',
@@ -12,11 +11,25 @@ import { Injectable } from "@angular/core";
 
 
 export class GetContactInfoComponent implements OnInit {
-  // @ViewChild('myModel') myModel: ModalDirective;
+
+  // listDistrict: Array<District> = [];
+  listProvince: Array<Province> = [];
+  listDistrict: Array<District> = [];
+
+  constructor(private customerSer: CustomerService) { }
 
   ngOnInit(): void {
-    // this.myModel.show();
+    this.customerSer.getAllProvince().subscribe((
+      data => {
+        this.listProvince = data;
+      }));
   }
 
-
+  onChangeProvince(id_province: number) {
+    this.customerSer.getAllDistrictByIdProvince(id_province).subscribe((data => {
+      this.listDistrict = data;
+      // this.listProvince = null;
+    }))
+  }
 }
+

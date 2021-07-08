@@ -15,7 +15,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class AppComponent implements OnInit {
   @ViewChild('content', { static: true }) content: TemplateRef<any>;
-
   ngOnInit(): void {
     this.modalService.open(this.content);
   }
